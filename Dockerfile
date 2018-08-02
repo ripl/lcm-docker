@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
     python-dev \
     unzip \
     net-tools \
+    nano \
     # clean the apt cache
     && rm -rf /var/lib/apt/lists/*
 
@@ -41,3 +42,4 @@ RUN echo 'net.core.rmem_default=10485760' >> /etc/sysctl.conf
 # copy, then build examples
 COPY assets/examples /root/examples
 RUN cd /root/examples/publisher; lcm-gen -p example_t.lcm
+RUN cd /root/examples/listener; lcm-gen -p example_t.lcm
