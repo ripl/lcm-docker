@@ -26,6 +26,16 @@ containers via LCM, run
 docker run -it --net=host ripl/lcm:latest
 ```
 
+## Tests
+
+| Host | Containers | Tunnel | Executed | Works? |
+|------|------------|--------|----------|--------|
+| Mac  | 1 | No | :heavy_check_mark: | :heavy_multiplication_x: |
+| Linux  | 1 | No | :heavy_check_mark: | :heavy_check_mark: |
+| Linux  | 2 | No | :heavy_check_mark: | :heavy_check_mark: |
+| Mac  | 1 | Yes | :heavy_multiplication_x: | TBA |
+| Mac  | 2 | Yes | :heavy_multiplication_x: | TBA |
+
 
 ## Run on Mac
 
