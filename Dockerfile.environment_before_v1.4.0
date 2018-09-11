@@ -1,9 +1,6 @@
 # Base image
 FROM ubuntu:16.04
 
-# Ubuntu version
-ENV UBUNTU_DISTRIB_CODENAME "xenial"
-
 # set default LCM_DEFAULT_URL
 ENV LCM_IP "239.255.76.67"
 ENV LCM_PORT "7667"
@@ -17,11 +14,10 @@ ENV LCM_INSTALL_DIR "/usr/local/lib"
 # update apt lists and install system libraries, then clean the apt cache
 RUN apt-get update && apt-get install -y \
     wget \
-    cmake \
+    build-essential \
     libglib2.0-dev \
     python-dev \
     unzip \
-    openjdk-8-jdk \
     # clean the apt cache
     && rm -rf /var/lib/apt/lists/*
 
