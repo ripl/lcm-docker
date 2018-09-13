@@ -14,3 +14,6 @@ RUN \
     cd lcm-$LCM_VERSION && mkdir build && cd build && cmake ../ && make install && ldconfig && \
 # delete source code
     cd / && rm -rf $LCM_VERSION.zip lcm-$LCM_VERSION
+
+# configure pkgconfig to find LCM
+ENV PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$LCM_INSTALL_DIR/pkgconfig
