@@ -17,6 +17,6 @@ RUN \
 # open up the source
     unzip lcm-$LCM_VERSION.zip && \
 # configure, build, install, and configure LCM
-    cd lcm-$LCM_VERSION && ./configure && make && make install && ldconfig && \
+    cd lcm-$LCM_VERSION && mkdir build && cd build && cmake ../ && make install && ldconfig && \
 # delete source code
     cd / &&rm -rf lcm-$LCM_VERSION.zip lcm-$LCM_VERSION
