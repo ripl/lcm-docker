@@ -3,6 +3,7 @@ FROM ubuntu:16.04
 
 # Ubuntu version
 ENV UBUNTU_DISTRIB_CODENAME "xenial"
+ARG DEBIAN_FRONTEND=noninteractive
 
 # set default LCM_DEFAULT_URL
 ENV LCM_IP "239.255.76.67"

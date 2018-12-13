@@ -1,5 +1,5 @@
 # Base image
-FROM afdaniele/lcm:latest
+FROM ripl/lcm:latest
 
 # copy, then build examples
 COPY assets/examples /root/examples
