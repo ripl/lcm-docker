@@ -59,4 +59,4 @@ I'm still not sure whether the Docker `bridged` network between two or more
 containers on Mac supports multicast (this should be tested).
 Regardless of this issue, the workaround should work nicely when there is only
 one LCM container running on a Mac host. In this case, the same LCM container
-would deploy the tunnel.
+would deploy the tunnel. 
