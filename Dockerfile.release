@@ -1,5 +1,5 @@
 # Base image
-FROM afdaniele/lcm:environment
+FROM ripl/lcm:environment
 
 # define build arguments
 ARG VERSION

@@ -1,5 +1,5 @@
 # Base image
-FROM afdaniele/lcm:environment
+FROM ripl/lcm:environment
 
 # set default LCM_VERSION
 ENV LCM_VERSION 'master'
