@@ -1,5 +1,7 @@
 # LCM in Docker
 
+[![Build Status](http://jenkins.box0.afdaniele.com/job/Docker%20AutoBuild%20-%20lcm/badge/icon)](http://jenkins.box0.afdaniele.com/job/Docker%20AutoBuild%20-%20lcm/)
+
 This repo contains all you need in order to use LCM inside a Docker container.
 
 **NOTE:** Due to the presence of a virtualization layer when running linux
