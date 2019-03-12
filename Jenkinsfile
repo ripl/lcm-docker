@@ -53,7 +53,7 @@ pipeline {
         }
       }
     }
-    stage('Post - Clean up') {
+    stage('Clean up') {
       steps {
         sh 'docker rmi $BUILD_IMAGE_RELEASE'
         sh 'docker rmi $BUILD_IMAGE_LATEST'
