@@ -20,6 +20,7 @@ ENV LCM_INSTALL_DIR "/usr/local/lib"
 RUN apt-get update && apt-get install -y \
     wget \
     cmake \
+    g++ \
     libglib2.0-dev \
     python-dev \
     unzip \
