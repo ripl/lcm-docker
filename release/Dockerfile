@@ -103,8 +103,8 @@ RUN wget https://github.com/lcm-proj/lcm/releases/download/v$LCM_VERSION/lcm-$LC
     mkdir build && \
     cd build && \
     cmake ../ && \
-    make install && \
+    make -j install && \
     ldconfig && \
-    cd ../ && \
-    ls -alh && \
-    rm lcm-$LCM_VERSION.zip lcm-$LCM_VERSION
+    cd ../../ && \
+    rm lcm-$LCM_VERSION.zip && \
+    rm -rf lcm-$LCM_VERSION
