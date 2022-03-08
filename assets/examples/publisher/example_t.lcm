@@ -1,7 +1,0 @@
-package exlcm;
-struct example_t
-{
-    int64_t  timestamp;
-    string   name;
-    boolean  enabled;
-}

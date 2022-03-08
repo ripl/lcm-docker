@@ -1,0 +1,10 @@
+# LIST YOUR APT PACKAGES HERE
+
+# these are dependencies for LCM
+wget
+cmake
+g++
+libglib2.0-dev
+python3-dev
+unzip
+openjdk-8-jdk

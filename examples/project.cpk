@@ -1,0 +1,9 @@
+{
+    "description": "LCM Examples",
+    "maintainer": "ripl",
+    "name": "lcm",
+    "organization": "ripl",
+    "tag": "examples",
+    "schema": "1.0",
+    "template": null
+}

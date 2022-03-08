@@ -1,0 +1,9 @@
+{
+    "description": "LCM Release",
+    "maintainer": "ripl",
+    "name": "lcm",
+    "organization": "ripl",
+    "schema": "1.0",
+    "template": null,
+    "version": "1.4.0"
+}

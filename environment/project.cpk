@@ -1,0 +1,9 @@
+{
+    "description": "LCM Base Environment",
+    "maintainer": "ripl",
+    "name": "lcm",
+    "organization": "ripl",
+    "tag": "environment",
+    "schema": "1.0",
+    "template": null
+}
