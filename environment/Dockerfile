@@ -10,7 +10,7 @@ ARG MAINTAINER
 ARG BASE_REGISTRY=docker.io
 ARG BASE_ORGANIZATION=cpkbase
 ARG BASE_REPOSITORY=ubuntu
-ARG BASE_TAG=focal
+ARG BASE_TAG=bionic
 
 # define base image
 FROM ${BASE_REGISTRY}/${BASE_ORGANIZATION}/${BASE_REPOSITORY}:${BASE_TAG}-${ARCH} as BASE
@@ -98,3 +98,8 @@ ENV LCM_IP "239.255.76.67" \
 # set the Kernel UDP buffer size to 10MB
 RUN echo 'net.core.rmem_max=10485760' >> /etc/sysctl.conf
 RUN echo 'net.core.rmem_default=10485760' >> /etc/sysctl.conf
+
+# decorate python2 to avoid conflict with python3 libraries
+COPY assets/python2.7 /usr/local/bin/python2.7
+RUN ln -s /usr/local/bin/python2.7 /usr/local/bin/python2 && \
+    ln -s /usr/local/bin/python2.7 /usr/local/bin/python \
