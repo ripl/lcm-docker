@@ -100,17 +100,10 @@ ENV LCM_VERSION $VERSION
 RUN wget https://github.com/lcm-proj/lcm/releases/download/v$LCM_VERSION/lcm-$LCM_VERSION.zip && \
     unzip lcm-$LCM_VERSION.zip && \
     cd lcm-$LCM_VERSION && \
-    # build for Python2.7
+    # build for Python3.8
     mkdir build && \
     cd build && \
-    cmake -DPYTHON_EXECUTABLE=/usr/bin/python2.7 ../ && \
-    make -j install && \
-    cd ../ && \
-    rm -rf build && \
-    # build for Python3.6
-    mkdir build && \
-    cd build && \
-    cmake -DPYTHON_EXECUTABLE=/usr/bin/python3.6 ../ && \
+    cmake ../ && \
     make -j install && \
     # configure
     ldconfig && \
