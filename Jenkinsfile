@@ -44,7 +44,7 @@ pipeline {
     }
     stage('Push Image') {
       steps {
-        withDockerRegistry(credentialsId: 'DockerHub', url: 'https://index.docker.io/v1/') {
+        withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
           sh 'docker push $BUILD_IMAGE_LATEST'
           sh 'docker push $BUILD_IMAGE_RELEASE'
 
