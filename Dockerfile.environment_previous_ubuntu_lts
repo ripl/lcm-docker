@@ -1,8 +1,8 @@
 # Base image
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 
 # Ubuntu version
-ENV UBUNTU_DISTRIB_CODENAME "xenial"
+ENV UBUNTU_DISTRIB_CODENAME "focal"
 ARG DEBIAN_FRONTEND=noninteractive
 
 # set default LCM_DEFAULT_URL
@@ -18,7 +18,7 @@ ENV LCM_INSTALL_DIR "/usr/local/lib"
 # update apt lists and install system libraries, then clean the apt cache
 RUN apt-get update && apt-get install -y \
     wget \
-    cmake3 \
+    cmake \
     libglib2.0-dev \
     python-dev \
     unzip \
