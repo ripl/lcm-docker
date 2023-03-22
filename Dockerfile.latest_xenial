@@ -1,5 +1,5 @@
 # Base image
-FROM ripl/lcm:environment_trusty
+FROM ripl/lcm:environment_xenial
 
 # set default LCM_VERSION
 ENV LCM_VERSION 'master'

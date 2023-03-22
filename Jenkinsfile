@@ -15,7 +15,7 @@ pipeline {
     BUILD_IMAGE_RELEASE = "ripl/lcm:${RELEASE_VERSION}"
 
     // Tag: environment_xenial
-    BASE_IMAGE_ENVIRONMENT_XENIAL = "ubuntu:14.04"
+    BASE_IMAGE_ENVIRONMENT_XENIAL = "ubuntu:16.04"
     BUILD_IMAGE_ENVIRONMENT_XENIAL = "ripl/lcm:environment_xenial"
 
     // Tag: latest_xenial
