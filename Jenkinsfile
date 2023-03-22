@@ -14,21 +14,21 @@ pipeline {
     // Tag: <release>
     BUILD_IMAGE_RELEASE = "ripl/lcm:${RELEASE_VERSION}"
 
-    // Tag: environment_trusty
-    BASE_IMAGE_ENVIRONMENT_TRUSTY = "ubuntu:14.04"
-    BUILD_IMAGE_ENVIRONMENT_TRUSTY = "ripl/lcm:environment_trusty"
+    // Tag: environment_xenial
+    BASE_IMAGE_ENVIRONMENT_XENIAL = "ubuntu:14.04"
+    BUILD_IMAGE_ENVIRONMENT_XENIAL = "ripl/lcm:environment_xenial"
 
-    // Tag: latest_trusty
-    BUILD_IMAGE_LATEST_TRUSTY = "ripl/lcm:latest_trusty"
+    // Tag: latest_xenial
+    BUILD_IMAGE_LATEST_XENIAL = "ripl/lcm:latest_xenial"
 
-    // Tag: <release>_trusty
-    BUILD_IMAGE_RELEASE_TRUSTY = "ripl/lcm:${RELEASE_VERSION}_trusty"
+    // Tag: <release>_XENIAL
+    BUILD_IMAGE_RELEASE_XENIAL = "ripl/lcm:${RELEASE_VERSION}_xenial"
   }
   stages {
     stage('Update Base Image') {
       steps {
         sh 'docker pull $BASE_IMAGE_ENVIRONMENT'
-        sh 'docker pull $BASE_IMAGE_ENVIRONMENT_TRUSTY'
+        sh 'docker pull $BASE_IMAGE_ENVIRONMENT_XENIAL'
       }
     }
     stage('Build Image') {
@@ -37,9 +37,9 @@ pipeline {
         sh 'docker build -t $BUILD_IMAGE_LATEST -f Dockerfile.latest ./'
         sh 'docker build -t $BUILD_IMAGE_RELEASE --build-arg VERSION=$RELEASE_VERSION -f Dockerfile.release ./'
 
-        sh 'docker build -t $BUILD_IMAGE_ENVIRONMENT_TRUSTY -f Dockerfile.environment_trusty ./'
-        sh 'docker build -t $BUILD_IMAGE_LATEST_TRUSTY -f Dockerfile.latest_trusty ./'
-        sh 'docker build -t $BUILD_IMAGE_RELEASE_TRUSTY --build-arg VERSION=$RELEASE_VERSION -f Dockerfile.release_trusty ./'
+        sh 'docker build -t $BUILD_IMAGE_ENVIRONMENT_XENIAL -f Dockerfile.environment_xenial ./'
+        sh 'docker build -t $BUILD_IMAGE_LATEST_XENIAL -f Dockerfile.latest_xenial ./'
+        sh 'docker build -t $BUILD_IMAGE_RELEASE_XENIAL --build-arg VERSION=$RELEASE_VERSION -f Dockerfile.release_xenial ./'
       }
     }
     stage('Push Image') {
@@ -48,8 +48,8 @@ pipeline {
           sh 'docker push $BUILD_IMAGE_LATEST'
           sh 'docker push $BUILD_IMAGE_RELEASE'
 
-          sh 'docker push $BUILD_IMAGE_LATEST_TRUSTY'
-          sh 'docker push $BUILD_IMAGE_RELEASE_TRUSTY'
+          sh 'docker push $BUILD_IMAGE_LATEST_XENIAL'
+          sh 'docker push $BUILD_IMAGE_RELEASE_XENIAL'
         }
       }
     }
@@ -60,10 +60,10 @@ pipeline {
         sh 'docker rmi $BUILD_IMAGE_ENVIRONMENT'
         sh 'docker rmi $BASE_IMAGE_ENVIRONMENT'
 
-        sh 'docker rmi $BUILD_IMAGE_RELEASE_TRUSTY'
-        sh 'docker rmi $BUILD_IMAGE_LATEST_TRUSTY'
-        sh 'docker rmi $BUILD_IMAGE_ENVIRONMENT_TRUSTY'
-        sh 'docker rmi $BASE_IMAGE_ENVIRONMENT_TRUSTY'
+        sh 'docker rmi $BUILD_IMAGE_RELEASE_XENIAL'
+        sh 'docker rmi $BUILD_IMAGE_LATEST_XENIAL'
+        sh 'docker rmi $BUILD_IMAGE_ENVIRONMENT_XENIAL'
+        sh 'docker rmi $BASE_IMAGE_ENVIRONMENT_XENIAL'
 
         cleanWs()
       }
