@@ -72,7 +72,7 @@ docker-build:
 	docker build -t $(BUILD_IMAGE_RELEASE_PREVIOUS_UBUNTU_LTS) --build-arg VERSION=$(RELEASE_VERSION) -f Dockerfile.release_previous_ubuntu_lts ./
 
 
-release: build push	## builds a new version of your container image, and pushes it to the registry
+release: build push	## builds a new version of your container image(s), and pushes it/them to the registry
 
 
 push: pre-push do-push post-push 
