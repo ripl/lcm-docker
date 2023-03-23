@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  triggers {
+    githubPush()
+  }
   stages {
     stage('Update Base Image') {
       steps {
