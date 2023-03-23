@@ -35,8 +35,6 @@ BUILD_IMAGE_RELEASE_PREVIOUS_UBUNTU_LTS = $(IMAGE):$(RELEASE_VERSION)_$(PREVIOUS
 
 
 
-
-
 .PHONY: pre-build docker-build build release showver \
 	push cleanup
 
