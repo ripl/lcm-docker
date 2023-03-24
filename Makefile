@@ -9,16 +9,16 @@ RELEASE_VERSION = "1.4.0"
 
 # Use two base environments
 #     latest supported LTS
-BASE_IMAGE_ENVIRONMENT = "ubuntu:22.04"
+BASE_IMAGE_ENVIRONMENT = "nvidia/opengl:1.0-glvnd-devel-ubuntu20.04"
 
 #     previously supported LTS   
-BASE_IMAGE_ENVIRONMENT_PREVIOUS_UBUNTU_LTS = "ubuntu:20.04"
-PREVIOUS_UBUNTU_LTS = "focal"
+BASE_IMAGE_ENVIRONMENT_PREVIOUS_UBUNTU_LTS = "nvidia/opengl:1.0-glvnd-devel-ubuntu18.04"
+PREVIOUS_UBUNTU_LTS = "bionic"
 
 # Tag: environment
 BUILD_IMAGE_ENVIRONMENT = $(IMAGE):environment
 
-# Tag: environment_focal
+# Tag: environment_bionic
 BUILD_IMAGE_ENVIRONMENT_PREVIOUS_UBUNTU_LTS = $(IMAGE):environment_$(PREVIOUS_UBUNTU_LTS)
 
 # Tag: latest

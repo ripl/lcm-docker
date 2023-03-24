@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y \
     cmake \
     g++ \
     libglib2.0-dev \
-    python-dev \
+    python3-dev \
     unzip \
     openjdk-8-jdk \
     # clean the apt cache

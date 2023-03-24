@@ -1,5 +1,5 @@
 # Base image
-FROM ripl/lcm:environment_focal
+FROM ripl/lcm:environment_bionic
 
 # define build arguments
 ARG VERSION
