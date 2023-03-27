@@ -10,7 +10,7 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # set default LCM_VERSION
-ENV LCM_VERSION 'master'
+ENV LCM_VERSION 'dev-release-1.5'
 
 # install LCM
 RUN \
