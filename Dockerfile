@@ -1,5 +1,10 @@
+# Parameters
+ARG REPO_NAME="lcm-docker"
+ARG DESCRIPTION="Contains the LCM (Lightweight Communications and Marshalling) library"
+ARG MAINTAINER="Matthew Walter (mwalter@ttic.edu)"
+
+
 # Base image
-# FROM ubuntu:20.04
 FROM nvidia/opengl:1.0-glvnd-devel-ubuntu20.04
 
 # Ubuntu version
@@ -25,12 +30,35 @@ RUN apt-get update && apt-get install -y \
     python3-dev \
     unzip \
     openjdk-8-jdk \
+    locales \
     # clean the apt cache
     && rm -rf /var/lib/apt/lists/*
+
+# Call locale-gen
+RUN locale-gen en_US.UTF-8
+
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
 
 # set the Kernel UDP buffer size to 10MB
 RUN echo 'net.core.rmem_max=10485760' >> /etc/sysctl.conf
 RUN echo 'net.core.rmem_default=10485760' >> /etc/sysctl.conf
 
 # set default LCM_VERSION
-ENV LCM_VERSION "not_installed"
+ENV LCM_VERSION '1.5.0'
+
+# install LCM
+RUN \
+# pull lcm
+    # Zip files are prepended with 'v'
+    wget https://github.com/lcm-proj/lcm/archive/refs/tags/v$LCM_VERSION.zip && \
+# open up the source
+    unzip v$LCM_VERSION.zip && \
+# configure, build, install, and configure LCM
+    cd lcm-$LCM_VERSION && mkdir build && cd build && cmake ../ && make install && ldconfig && \
+# delete source code
+    cd / && rm -rf v$LCM_VERSION.zip lcm-$LCM_VERSION
+
+# configure pkgconfig to find LCM
+ENV PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$LCM_INSTALL_DIR/pkgconfig
