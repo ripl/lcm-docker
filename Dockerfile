@@ -3,12 +3,13 @@ ARG REPO_NAME="lcm-docker"
 ARG DESCRIPTION="Contains the LCM (Lightweight Communications and Marshalling) library"
 ARG MAINTAINER="Matthew Walter (mwalter@ttic.edu)"
 
+ARG UBUNTU_VERSION=20.04
 
 # Base image
-FROM nvidia/opengl:1.0-glvnd-devel-ubuntu20.04
+FROM nvidia/opengl:1.0-glvnd-devel-ubuntu$UBUNTU_VERSION
 
 # Ubuntu version
-ENV UBUNTU_DISTRIB_CODENAME "focal"
+#ENV UBUNTU_DISTRIB_CODENAME "focal"
 ARG DEBIAN_FRONTEND=noninteractive
 
 # set default LCM_DEFAULT_URL
