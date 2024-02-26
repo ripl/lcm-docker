@@ -13,8 +13,8 @@ include .env
 #UBUNTU_VERSION_PREVIOUS = "18.04"
 
 # Base environments
-BASE_IMAGE_ENVIRONMENT_LATEST = "nvidia/opengl:1.0-glvnd-devel-ubuntu${UBUNTU_VERSION_LATEST}"
-BASE_IMAGE_ENVIRONMENT_PREVIOUS = "nvidia/opengl:1.0-glvnd-devel-ubuntu${UBUNTU_VERSION_PREVIOUS}"
+BASE_IMAGE_ENVIRONMENT_LATEST = ubuntu:${UBUNTU_VERSION_LATEST}#"nvidia/opengl:1.0-glvnd-devel-ubuntu${UBUNTU_VERSION_LATEST}
+BASE_IMAGE_ENVIRONMENT_PREVIOUS = ubuntu:${UBUNTU_VERSION_PREVIOUS}#"nvidia/opengl:1.0-glvnd-devel-ubuntu${UBUNTU_VERSION_PREVIOUS}"
 
 
 # Tag: latest
@@ -58,10 +58,10 @@ push: pre-push do-push post-push ## pushes the images to dockerhub
 
 do-push: 
 	# Push lateset
-	docker buildx build --build-arg="UBUNTU_VERSION=${UBUNTU_VERSION_LATEST}" --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --push --tag $(BUILD_IMAGE_LATEST) -f Dockerfile .
+	docker buildx build --build-arg="UBUNTU_VERSION=${UBUNTU_VERSION_LATEST}" --platform linux/arm64/v8,linux/amd64 --push --tag $(BUILD_IMAGE_LATEST) -f Dockerfile .
 
 	# Push previous
-	docker buildx build --build-arg="UBUNTU_VERSION=${UBUNTU_VERSION_PREVIOUS}" --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --push --tag $(BUILD_IMAGE_PREVIOUS) -f Dockerfile .
+	docker buildx build --build-arg="UBUNTU_VERSION=${UBUNTU_VERSION_PREVIOUS}" --platform linux/arm64/v8,linux/amd64 --push --tag $(BUILD_IMAGE_PREVIOUS) -f Dockerfile .
 
 
 cleanup: ## Remove images pulled/generated as part of the build process

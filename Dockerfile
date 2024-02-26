@@ -6,7 +6,10 @@ ARG MAINTAINER="Matthew Walter (mwalter@ttic.edu)"
 ARG UBUNTU_VERSION=20.04
 
 # Base image
-FROM nvidia/opengl:1.0-glvnd-devel-ubuntu$UBUNTU_VERSION
+#FROM nvidia/opengl:1.0-glvnd-devel-ubuntu$UBUNTU_VERSION
+FROM ubuntu:$UBUNTU_VERSION
+
+ARG TARGETPLATFORM
 
 # Ubuntu version
 #ENV UBUNTU_DISTRIB_CODENAME "focal"
@@ -49,16 +52,30 @@ RUN echo 'net.core.rmem_default=10485760' >> /etc/sysctl.conf
 # set default LCM_VERSION
 ENV LCM_VERSION '1.5.0'
 
+# On at least arm/v7, wget throws an error stating that
+# it can not verify github.com's certificate
+# RUN if [ "$TARGETPLATFORM" = "linux/arm/v7" ]; then \
+#         update-ca-certificates -f; \
+#     fi
+
+
+# CMake is unable to find glib-2.0 libraries 
+# using the LCM-provided cmake/FindGLib2.cmake
+#RUN if [ "$TARGETPLATFORM" = "linux/arm/v7" ]; then \
+#ENV GLIB_PATH=/usr/lib/arm-linux-gnueabihf/
+#ENV Python_LIBRARY=/usr/lib/arm-linux-gnueabihf/libpython3.8.so
+#    fi
+
 # install LCM
 RUN \
 # pull lcm
     # Zip files are prepended with 'v'
     wget https://github.com/lcm-proj/lcm/archive/refs/tags/v$LCM_VERSION.zip && \
-# open up the source
+    # open up the source
     unzip v$LCM_VERSION.zip && \
-# configure, build, install, and configure LCM
+    # configure, build, install, and configure LCM
     cd lcm-$LCM_VERSION && mkdir build && cd build && cmake ../ && make install && ldconfig && \
-# delete source code
+    # delete source code
     cd / && rm -rf v$LCM_VERSION.zip lcm-$LCM_VERSION
 
 # configure pkgconfig to find LCM
