@@ -18,7 +18,7 @@ BASE_IMAGE_ENVIRONMENT_PREVIOUS = ubuntu:${UBUNTU_VERSION_PREVIOUS}#"nvidia/open
 
 
 # Tag: latest
-BUILD_IMAGE_LATEST = $(IMAGE):latest
+BUILD_IMAGE_LATEST = $(IMAGE):${UBUNTU_VERSION_LATEST}
 BUILD_IMAGE_PREVIOUS = $(IMAGE):${UBUNTU_VERSION_PREVIOUS}
 
 
@@ -44,11 +44,11 @@ post-push:
 
 docker-build:
 
-	# Build latest
-	docker buildx build --build-arg="UBUNTU_VERSION=${UBUNTU_VERSION_LATEST}" --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag $(BUILD_IMAGE_LATEST) -f Dockerfile .
+	# Build latest with multiple tags
+	docker buildx build --build-arg="UBUNTU_VERSION=${UBUNTU_VERSION_LATEST}" --platform linux/arm64/v8,linux/amd64 --tag $(BUILD_IMAGE_LATEST) --tag $(IMAGE):latest -f Dockerfile .
 
 	# Build previous
-	docker buildx build --build-arg="UBUNTU_VERSION=${UBUNTU_VERSION_PREVIOUS}" --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag $(BUILD_IMAGE_PREVIOUS) -f Dockerfile .
+	docker buildx build --build-arg="UBUNTU_VERSION=${UBUNTU_VERSION_PREVIOUS}" --platform linux/arm64/v8,linux/amd64 --tag $(BUILD_IMAGE_PREVIOUS) -f Dockerfile .
 
 
 release: build push	## builds a new version of your container image(s), and pushes it/them to the registry
@@ -58,7 +58,7 @@ push: pre-push do-push post-push ## pushes the images to dockerhub
 
 do-push: 
 	# Push lateset
-	docker buildx build --build-arg="UBUNTU_VERSION=${UBUNTU_VERSION_LATEST}" --platform linux/arm64/v8,linux/amd64 --push --tag $(BUILD_IMAGE_LATEST) -f Dockerfile .
+	docker buildx build --build-arg="UBUNTU_VERSION=${UBUNTU_VERSION_LATEST}" --platform linux/arm64/v8,linux/amd64 --push --tag $(BUILD_IMAGE_LATEST)  --tag $(IMAGE):latest -f Dockerfile .
 
 	# Push previous
 	docker buildx build --build-arg="UBUNTU_VERSION=${UBUNTU_VERSION_PREVIOUS}" --platform linux/arm64/v8,linux/amd64 --push --tag $(BUILD_IMAGE_PREVIOUS) -f Dockerfile .
@@ -66,6 +66,7 @@ do-push:
 
 cleanup: ## Remove images pulled/generated as part of the build process
 	docker rmi $(BUILD_IMAGE_LATEST)
+	docker rmi $(IMAGE):latest
 	docker rmi $(BUILD_IMAGE_PREVIOUS)
 	docker rmi $(BASE_IMAGE_ENVIRONMENT_LATEST)
 	docker rmi $(BASE_IMAGE_ENVIRONMENT_PREVIOUS)
