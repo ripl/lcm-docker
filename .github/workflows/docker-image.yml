@@ -39,5 +39,5 @@ jobs:
           context: .
           platforms: linux/arm64/v8,linux/amd64
           push: true
-          tags: ripl/lcm:latest
+          tags: ripl/lcm:latest, ripl/lcm:${{ env.UBUNTU_VERSION_LATEST }}
           build-args: UBUNTU_VERSION=${{ env.UBUNTU_VERSION_LATEST }}
